@@ -1,35 +1,38 @@
-# SOLID + GoF Mini Project (Java)
+# Mini Projeto SOLID + GoF (Java)
 
-A small, **interview-friendly** Java project to demonstrate:
-- **SOLID** (SRP, OCP, DIP + clean layering)
-- **GoF patterns**: **Strategy**, **Factory Method** (simple factory), **Singleton**
+Projeto Java pequeno e **amigável para entrevistas**, feito para demonstrar **POO**, princípios **SOLID** e padrões **GoF** (Strategy, Factory, Singleton) em um cenário simples de **checkout**.
 
-## What the app does
-Simulates a simple **checkout**:
-1. Builds an `Order` with items
-2. Applies a `DiscountPolicy` (**Strategy**)
-3. Chooses a `PaymentMethod` via `PaymentFactory` (**Factory**)
-4. Sends a notification via a `Notifier` abstraction (**DIP**)
-5. Saves to an `OrderRepository` abstraction (**DIP**)
+## Objetivo
+Mostrar na prática como estruturar um código **limpo, modular e fácil de manter**, usando:
+- **SOLID**: SRP, OCP, DIP (com separação de responsabilidades e dependência por abstrações)
+- **GoF**: **Strategy**, **Factory (simple factory)**, **Singleton**
+- **Testes unitários** com **JUnit 5**
 
-## Tech
-- Java 17
-- Maven
-- JUnit 5
+---
 
-## Run
+## O que a aplicação faz
+Simula um checkout básico:
+1. Monta um `Order` com itens (`Item`)
+2. Calcula subtotal e aplica uma `DiscountPolicy` (**Strategy**)
+3. Seleciona um `PaymentMethod` via `PaymentFactory` (**Factory**)
+4. Envia notificação via `Notifier` (**DIP**)
+5. Persiste o pedido via `OrderRepository` (**DIP**)
+
+---
+
+## Tecnologias
+- **Java 17**
+- **Maven**
+- **JUnit 5**
+
+---
+
+## Como executar
+
+### Pré-requisitos
+- Java 17 instalado (`java -version`)
+- Maven instalado (`mvn -version`)
+
+### Rodar testes
 ```bash
 mvn test
-mvn -q exec:java
-```
-
-## Quick mapping (talking points)
-- **SRP**: `CheckoutService` orchestrates the flow; pricing/discount/payment/notification are delegated.
-- **OCP**: add new discounts or payment methods by creating new classes implementing interfaces—no changes needed in core rules.
-- **DIP**: `CheckoutService` depends on abstractions (`Notifier`, `OrderRepository`), not concrete implementations.
-- **Strategy**: `DiscountPolicy`, `PaymentMethod`
-- **Factory**: `PaymentFactory.create(...)` returns the appropriate strategy
-- **Singleton**: `AppConfig` centralizes simple settings
-
-## Resume bullet example
-“Built a Java mini-system applying **SOLID** and **GoF patterns** (Strategy, Factory, Singleton), using abstractions (DIP) and unit tests (JUnit) to validate behavior.”
